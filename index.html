@@ -5,8 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library</title>
-    <script src="./contructor.js" defer></script>
+    <script src="./library.js" defer></script>
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body></body>
+  <body>
+    <h1 class="page-title"">JS Library</h1>
+    <div class="form-container">
+      <form class="form" id="form">
+        <div class="container-input">
+          <label for="title-book">Book Title</label>
+          <input id="title-book" type="text" required/>
+        </div>
+
+        <div class="container-input">
+          <label for="author-book">Book Author</label>
+          <input id="author-book" type="text" required/>
+        </div>
+        <div class="container-input">
+          <label for="pages-book">Book Pages</label>
+          <input id="pages-book" type="number" min="10" max="1000" required/>
+        </div>
+        <div class="container-input">
+          <label for="read-book">Have you read it?</label>
+          <input id="read-book" type="checkbox" />
+        </div>
+
+        <button type="submit" id="add-box-btn">Add a book</button>
+      </form>
+    </div>
+    <div class="books-container">
+      <!-- <div class="book-el" > 
+        <p class="title-el">The Hobbit</p>
+        <p class="author-el">J.R.R</p>
+        <p class="pages-el">26 pages</p>
+        <button class="read-el" >read</button>
+        <button class="delete-el">Delete book</button> -->
+      </div>
+      
+    </div>
+  </body>
 </html>
