@@ -104,7 +104,6 @@ const getBookDataForm = (e) => {
 const lookForStorage = () => {
   if (localStorage.getItem("library")) {
     const storageLibrary = JSON.parse(localStorage.getItem("library"));
-    console.log(storageLibrary);
     storageLibrary.forEach((book) => {
       addBookToLibrary(book.title, book.author, book.pages, book.read);
     });
