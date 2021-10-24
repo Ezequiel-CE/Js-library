@@ -26,13 +26,6 @@ const form = document.getElementById("form");
 const booksContainer = document.querySelector(".books-container");
 
 const createElement = (bookObj) => {
-  //     <div class="book-el" >
-  //       <p class="title-el">The Hobbit</p>
-  //       <p class="author-el">J.R.R</p>
-  //       <p class="pages-el">26 pages</p>
-  //       <button class="read-el" >read</button>
-  //       <button class="delete-el">Delete book</button>
-  //create a bock component
   const div = document.createElement("div");
   div.classList.add("book-el");
 
@@ -41,13 +34,13 @@ const createElement = (bookObj) => {
   const authorP = document.createElement("p");
   authorP.textContent = bookObj.author;
   const pagesP = document.createElement("p");
-  pagesP.textContent = bookObj.pages;
+  pagesP.textContent = `${bookObj.pages} pages`;
   const readbtn = document.createElement("button");
   readbtn.textContent = bookObj.read ? "READ" : "NOT READ";
   readbtn.classList.add("read-el");
   const deleteBtn = document.createElement("button");
   deleteBtn.classList.add("delete-el");
-  deleteBtn.textContent = "Delete Book";
+  deleteBtn.textContent = "DELETE";
 
   div.appendChild(titleP);
   div.appendChild(authorP);
@@ -63,12 +56,16 @@ const createElement = (bookObj) => {
     );
     //elimina el el y modifica el array
     myLibrary.splice(indexEl, 1);
+    //actualiza el store
+    addToStorage(myLibrary);
     booksContainer.removeChild(div);
   });
   //cambia el estado del read
   readbtn.addEventListener("click", () => {
     bookObj.toggleRead();
     readbtn.textContent = bookObj.read ? "READ" : "NOT READ";
+    //actualiza
+    addToStorage(myLibrary);
   });
 
   booksContainer.appendChild(div);
@@ -82,12 +79,15 @@ const addBookToLibrary = (title, author, pages, read) => {
 
   //crea elemento con el nuevo objeto
   createElement(libraryBook);
+
+  //agrega y actualiza el local storage
+  addToStorage(myLibrary);
 };
 
 //crea el elemento
 
 //obtiene la informacion de la data
-const getBookData = (e) => {
+const getBookDataForm = (e) => {
   e.preventDefault();
 
   //form data
@@ -101,12 +101,23 @@ const getBookData = (e) => {
   form.reset();
 };
 
+const lookForStorage = () => {
+  if (localStorage.getItem("library")) {
+    const storageLibrary = JSON.parse(localStorage.getItem("library"));
+    console.log(storageLibrary);
+    storageLibrary.forEach((book) => {
+      addBookToLibrary(book.title, book.author, book.pages, book.read);
+    });
+  } else {
+    console.log("no existe");
+  }
+};
+
+const addToStorage = (lib) => {
+  localStorage.setItem("library", JSON.stringify(lib));
+};
+
 // code
-form.addEventListener("submit", getBookData);
+form.addEventListener("submit", getBookDataForm);
 
-addBookToLibrary("The hobbit", "J.R.R", 256, true);
-addBookToLibrary("test", "ss", 25, false);
-addBookToLibrary("tes 2", "ss", 25, false);
-
-///// test
-console.log(myLibrary);
+lookForStorage();
