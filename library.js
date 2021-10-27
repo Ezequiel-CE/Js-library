@@ -1,25 +1,24 @@
 let myLibrary = [];
 let number_box = 0;
 
-//funcion costructora
+//clase para crear libro
 
-const Book = function (title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.number = number_box++;
-  this.toggleRead = function () {
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    this.number = number_box;
+  }
+  toggleRead() {
     if (this.read) {
-      this.read = false;
+      this.read = !this.read;
     } else {
-      this.read = true;
+      this.read = !this.read;
     }
-  };
-};
-
-//
-//elementos
+  }
+}
 
 const formBtn = document.getElementById("add-box-btn");
 const form = document.getElementById("form");
